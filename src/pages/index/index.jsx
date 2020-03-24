@@ -1,32 +1,25 @@
-import React, {  } from 'react';
-import { Link, Route, Switch, useRouteMatch, useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import {  } from 'react-router-dom';
+import { useContextState } from '@src/libs/useCHState';
+import importJSON from '@src/libs/XHRjson';
 
 const IndexPage = () => {
 
-  let { path, url } = useRouteMatch();
-  console.log(path, url);
+  const [{ config }, dispatch] = useContextState();
 
-  return <div>
-    <h1>Index Page</h1>
-    <ul>
-      <li><Link to={`${url}/about`}>关于</Link></li>
-    </ul>
-    <Switch>
-      <Route path={`${path}/:subPage`}>
-        <SubPage />
-      </Route>
-    </Switch>
-  </div>
-}
+  useEffect(() => {
+    async function fetchExConfig() {
+      const exConfig = await importJSON('/config.json');
+      dispatch({
+        type: 'config.merge',
+        data: exConfig
+      });
+    }
+    fetchExConfig();
+  }, [dispatch]);
 
-const SubPage = () => {
+  return <h1>Hello: {config.api || ''}</h1>
 
-  let { subPage } = useParams();
-  console.log(subPage);
-
-  return <p>
-    {subPage}
-  </p>
 }
 
 export default IndexPage;
