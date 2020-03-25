@@ -1,25 +1,17 @@
-import React, { useEffect } from 'react';
-import {  } from 'react-router-dom';
-import { useContextState } from '@src/libs/useCHState';
-import importJSON from '@src/libs/XHRjson';
+import React, { useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import importConfig from '@src/effects/importConfig'
+import Context from '@src/libs/useContextReducer'
 
 const IndexPage = () => {
+  const [{ config }] = Context.Reducer()
 
-  const [{ config }, dispatch] = useContextState();
+  useEffect(importConfig('/config.json'), [])
 
-  useEffect(() => {
-    async function fetchExConfig() {
-      const exConfig = await importJSON('/config.json');
-      dispatch({
-        type: 'config.merge',
-        data: exConfig
-      });
-    }
-    fetchExConfig();
-  }, [dispatch]);
-
-  return <h1>Hello: {config.api || ''}</h1>
-
+  return <div>
+    <p>{JSON.stringify(config)}</p>
+    <Link to={`/login`}>登录</Link>
+  </div>
 }
 
-export default IndexPage;
+export default IndexPage

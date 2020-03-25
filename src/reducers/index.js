@@ -1,5 +1,7 @@
 import configReducer from './config';
+import authReducer from './auth';
 
-export default ({ config }, action) => ({
-  config: configReducer(config, action)
+export default ({ config, auth }, action) => ({
+  config: configReducer(config, action),
+  auth: authReducer(auth, action)
 })
