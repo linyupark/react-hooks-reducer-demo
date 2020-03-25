@@ -10,6 +10,14 @@ export default (state, action) => {
     };
   }
 
+  // 登出
+  if (action.type === 'auth.logout') {
+    state = {
+      ...state,
+      signined: false
+    };
+  }
+
   // 更改角色
   if (action.type === 'auth.role') {
     state = {

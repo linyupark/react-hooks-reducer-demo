@@ -1,8 +1,9 @@
 import React, {  } from 'react';
-import { Layout } from 'antd';
+import { Layout, Row, Col } from 'antd';
 import './index.less';
 import styles from './index.module.css';
 import SiderMenu from './menus/sider';
+import SelectRole from './select/role';
 const { Header, Content, Footer, Sider } = Layout;
 
 
@@ -21,7 +22,14 @@ const AdminRoot = () => {
       <SiderMenu />
     </Sider>
     <Layout className="site-layout" style={{ marginLeft: 200, minHeight: '100vh' }}>
-      <Header className="site-layout-background" style={{ padding: 0 }} />
+      <Header className="site-layout-background" style={{ padding: 0 }}>
+        <Row>
+          <Col></Col>
+          <Col span={12} style={{ textAlign: 'right' }}>
+            <SelectRole />
+          </Col>
+        </Row>
+      </Header>
       <Content style={{ margin: '24px 16px 0', overflow: 'initial' }}>
         <div className="site-layout-background" style={{ padding: 24, minHeight: '80vh' }}>
           hello<br></br>

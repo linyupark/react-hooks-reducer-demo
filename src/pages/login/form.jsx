@@ -24,7 +24,7 @@ const LoginForm = () => {
     })
     setTimeout(() => {
       message.success('登录成功')
-    }, 2000)
+    }, 800)
   }
 
   const onFinishFailed = errorInfo => {
