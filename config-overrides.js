@@ -1,4 +1,4 @@
-const { override, fixBabelImports, addLessLoader, addWebpackPlugin, addWebpackAlias } = require('customize-cra');
+const { override, fixBabelImports, addLessLoader, addWebpackPlugin, addWebpackAlias, overrideDevServer } = require('customize-cra');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const path = require('path');
 
@@ -8,9 +8,16 @@ const addPrivatePkg = () => config => {
     path.resolve(__dirname, 'node_modules/@linyupark'),
     path.resolve(__dirname, 'src'),
   ];
-  // console.log(config);
   return config;
 };
+
+// 0.0.0.0
+const addDevOpenHost = () => config => {
+  return {
+    ...config,
+    host: '0.0.0.0'
+  };
+}
 
 module.exports = {
   webpack: override(
@@ -28,5 +35,8 @@ module.exports = {
       '@src': path.resolve(__dirname, 'src')
     }),
     addPrivatePkg()
+  ),
+  devServer: overrideDevServer(
+    addDevOpenHost()
   )
 };
