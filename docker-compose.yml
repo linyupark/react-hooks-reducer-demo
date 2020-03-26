@@ -1,0 +1,8 @@
+version: '3'
+services:
+  dev:
+    stdin_open: true
+    tty: true
+    build: .
+    ports:
+      - 18081:5000
