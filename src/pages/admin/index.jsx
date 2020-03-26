@@ -1,20 +1,20 @@
-import React, { lazy, useState } from 'react'
+import React, { lazy, useState, Suspense } from 'react'
 import { Layout, Row, Col } from 'antd'
 import './index.less'
 import styles from './index.module.css'
 import SiderMenu from './menus/sider'
 import SelectRole from './select/role'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
+import PageSpin from '@src/components/pageSpin'
 
 const { Header, Content, Footer, Sider } = Layout
 
 const AdminRoot = () => {
-
-  let { path } = useRouteMatch();
+  let { path } = useRouteMatch()
 
   console.log(path)
 
-  const [moduleKey, setModuleKey] = useState('user-1');
+  const [moduleKey, setModuleKey] = useState('user-1')
 
   const onSiderMenuClick = ({ key }) => {
     setModuleKey(key)
@@ -50,9 +50,14 @@ const AdminRoot = () => {
             className="site-layout-background"
             style={{ padding: 24, minHeight: '80vh' }}
           >
-            <Switch>
-              <Route path={`${path}/`} component={lazy(() => import(`./modules/demo/${moduleKey}`))}></Route>
-            </Switch>
+            <Suspense fallback={<PageSpin />}>
+              <Switch>
+                <Route
+                  path={`${path}/`}
+                  component={lazy(() => import(`./modules/demo/${moduleKey}`))}
+                ></Route>
+              </Switch>
+            </Suspense>
           </div>
         </Content>
         <Footer style={{ textAlign: 'center' }}>
