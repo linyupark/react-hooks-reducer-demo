@@ -9,7 +9,7 @@ let isImported = false;
  * 从外部引入配置信息
  */
 export default (url) => {
-  const [{ config }, dispatch] = Store.Reducer();
+  const [, dispatch] = Store.Reducer();
   return () => {
     async function fetchExConfig() {
       if (!isImported) {
@@ -19,7 +19,6 @@ export default (url) => {
           data: exConfig
         });
         isImported = true;
-        console.log('引入config:', config);
       }
     }
     fetchExConfig();

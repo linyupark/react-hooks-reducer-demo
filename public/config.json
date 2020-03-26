@@ -1,4 +1,4 @@
 {
   "version": "1.0.0",
-  "api": "http://localhost/"
+  "api": "http://linyu.dynv6.net:9002/graphql"
 }

@@ -9,7 +9,7 @@ const LoginPage = lazy(() => import('@src/pages/login'));
 const AdminPages = lazy(() => import('@src/pages/admin'));
 
 const App = () => {
-
+  
   return (
     <Context.Provider initState={Store} reducer={Reducer}>
       <BrowserRouter>
