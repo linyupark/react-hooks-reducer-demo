@@ -5,10 +5,18 @@ import Reducer from '@src/reducers';
 import Store from '@src/stores';
 import PageSpin from '@src/components/pageSpin';
 
+import useConfigModel from '@src/models/useConfigModel';
+import { useMount } from '@umijs/hooks';
+
 const LoginPage = lazy(() => import('@src/pages/login'));
 const AdminPages = lazy(() => import('@src/pages/admin'));
-
 const App = () => {
+
+  const { config, loadExConfig }  = useConfigModel();
+
+  useMount(() => {
+    loadExConfig();
+  })
   
   return (
     <Context.Provider initState={Store} reducer={Reducer}>
@@ -22,6 +30,7 @@ const App = () => {
                     {auth.signined ? <Redirect to="/admin" /> : <Redirect to="/login" />}
                   </Route>
                   <Route path="/login">
+                    {JSON.stringify(config)}
                     {auth.signined ? <Redirect to="/" /> : <LoginPage />}
                   </Route>
                   <Route path="/admin">

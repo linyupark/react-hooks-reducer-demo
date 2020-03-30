@@ -1,4 +1,4 @@
-import React, { lazy, useState, Suspense, useEffect } from 'react'
+import React, { lazy, useState, Suspense } from 'react'
 import { Layout, Row, Col } from 'antd'
 import './index.less'
 import styles from './index.module.css'
@@ -6,7 +6,6 @@ import SiderMenu from './menus/sider'
 import SelectRole from './select/role'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
 import PageSpin from '@src/components/pageSpin'
-import importConfig from '@src/effects/importConfig'
 
 
 const { Header, Content, Footer, Sider } = Layout
@@ -15,8 +14,6 @@ const AdminRoot = () => {
   let { path } = useRouteMatch()
 
   const [moduleKey, setModuleKey] = useState('user-1')
-
-  useEffect(importConfig('/config.json'), [])
 
   const onSiderMenuClick = ({ key }) => {
     setModuleKey(key)

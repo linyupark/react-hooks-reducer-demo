@@ -2,10 +2,13 @@ import React, { useEffect } from 'react'
 import { request } from 'graphql-request'
 import useSWR from 'swr'
 import { Table } from 'antd'
-import Context from '@src/libs/useContextReducer'
+// import Context from '@src/libs/useContextReducer'
+import useConfigModel from '@src/models/useConfigModel';
 
 const TableUsersDemo = () => {
-  const [{ config }] = Context.Reducer()
+  // const [{ config }] = Context.Reducer()
+  // 改为 hox 方式全局状态管理
+  const { config } = useConfigModel()
 
   const { data, error } = useSWR(
     `
