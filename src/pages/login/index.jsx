@@ -1,6 +1,6 @@
 import React from 'react'
 import Form from './form'
-import container from '@src/asserts/styles/container.module.css'
+import container from '@src/assets/styles/container.module.css'
 
 const LoginPage = () => {
   return (
